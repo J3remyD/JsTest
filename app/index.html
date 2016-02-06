@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>iPlayer list</title>
+
+  <!-- polymer elements -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="./bower_components/iron-flex-layout/iron-flex-layout.html">
+  <link rel="import" href="./bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="./bower_components/paper-material/paper-material.html">
+  <link rel="import" href="./bower_components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="./bower_components/paper-item/paper-item.html">
+  <link rel="import" href="./bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="./bower_components/paper-slider/paper-slider.html">
+  <link rel="import" href="./bower_components/paper-tooltip/paper-tooltip.html">
+  <link rel="import" href="./bower_components/iron-icons/maps-icons.html">
+
+  <!-- custom elements -->
+  <link rel="import" href="./alphabet-list.html">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="./main.css">
+
+  <style is="custom-style">
+    body {
+      margin: auto;
+      width: 800px;
+      height: 500px;
+    }
+
+    #container {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -ms-flex-direction: row;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+    }
+
+    #inputs, #center {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -ms-flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+
+    #center > paper-material {
+      margin: 10px 0px;
+    }
+
+    #inputs > paper-material {
+      padding: 20px;
+      margin: 10px 0px;
+    }
+
+    #pages {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #results {
+      -ms-flex: 2;
+      -webkit-flex: 2;
+      flex: 2;
+      margin: 10px;
+      padding: 50px;
+    }
+
+    #alphabet {
+      padding:20px;
+      font-size: 17px;
+      @apply(--layout-center);
+      @apply(--paper-font-subhead);
+      @apply(--paper-item);
+    }
+
+    .page {
+      padding:0 20px 0px 10px;
+      font-size: 15;
+      bottom: 15px;
+    }
+
+    paper-material {
+      background-color: whitesmoke;
+    }
+
+    paper-checkbox.available {
+    --paper-checkbox-checked-color: var(--paper-green-500);
+    --paper-checkbox-checked-ink-color: var(--paper-green-500);
+    --paper-checkbox-unchecked-color: var(--paper-green-900);
+    --paper-checkbox-unchecked-ink-color: var(--paper-green-900);
+    --paper-checkbox-label-color: var(--paper-green-500);
+    padding:10px;
+  }
+  </style>
+</head>
+
+<body unresolved>
+  <paper-toolbar>
+    <span class="title">Interview</span>
+  </paper-toolbar>
+  <div id="container">
+    <form id="inputs">
+      <paper-material>
+        <div>Title or summary</div>
+        <paper-input id="search-input" label="Search"></paper-input>
+      </paper-material>
+      <paper-material>
+        <div>Type</div>
+        <paper-input id="type-input" label="Search"></paper-input>
+      </paper-material>
+      <paper-material>
+        <div>Categories</div>
+        <paper-input id="categories-input" label="Categories"></paper-input>
+        <paper-tooltip for="categories-input" position="right">Separated by ;</paper-tooltip>
+      </paper-material>
+      <paper-material>
+        <div>Filters</div>
+        <br>
+        <paper-checkbox checked class="available">Available</paper-checkbox>
+        <p class="titlePages">Pages</p>
+        <div id="pages"></div>
+      </paper-material>
+    </form>
+    <form>
+      <div id="center">
+        <paper-material id="results">No Result</paper-material>
+    <!--    <paper-tabs id="pages" selected="{{activeTabId}}"></paper-tabs> -->
+        <!-- <paper-material id="pages" align="center">No Pagination</<paper-material>-->
+      </div>
+    </form>
+    <paper-listbox id="alphabet">
+         <paper-item>A</paper-item>
+         <paper-item>B</paper-item>
+         <paper-item>C</paper-item>
+         <paper-item>D</paper-item>
+         <paper-item>E</paper-item>
+         <paper-item>F</paper-item>
+         <paper-item>G</paper-item>
+         <paper-item>H</paper-item>
+         <paper-item>I</paper-item>
+         <paper-item>J</paper-item>
+         <paper-item>K</paper-item>
+         <paper-item>L</paper-item>
+         <paper-item>M</paper-item>
+         <paper-item>N</paper-item>
+         <paper-item>O</paper-item>
+         <paper-item>P</paper-item>
+         <paper-item>Q</paper-item>
+         <paper-item>R</paper-item>
+         <paper-item>S</paper-item>
+         <paper-item>T</paper-item>
+         <paper-item>U</paper-item>
+         <paper-item>V</paper-item>
+         <paper-item>W</paper-item>
+         <paper-item>X</paper-item>
+         <paper-item>Y</paper-item>
+         <paper-item>Z</paper-item>
+    </paper-listbox>
+  <!--  <alphabet-list id="alphabet" class="alphabet"></alphabet-list>-->
+  </div>
+  <script src="./bundle.js"></script>
+</body>
+
+</html>
