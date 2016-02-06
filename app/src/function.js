@@ -18,4 +18,11 @@ exports.filterCategories = function filterCategories(res, src) {
         }
      }
    });
-  }
+}
+
+exports.filterAvailability = function filterAvailability(res, checked) {
+  return res.filter(
+      function (el) {
+          return checked ? el.status === 'available' : el.status !== 'available';
+     });
+}

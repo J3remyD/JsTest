@@ -14,15 +14,10 @@ var page = utilities.defaultValues.defaultPage;
 
 // Input elements
 var search = document.getElementById('search-input');
-var date = {
-  from: document.getElementById('from-date-input'),
-  to: document.getElementById('to-date-input')
-};
-var type = document.getElementById('type-input');
 var categories = document.getElementById('categories-input');
 var results = document.getElementById('results');
 var alphabet = document.getElementById('alphabet');
-//var alphabet = document.getElementById('alphabet');
+var availability = document.getElementById('available');
 
 var currentCount=-1;
 var currentRows = [];
@@ -38,7 +33,8 @@ function init() {
 function checkAll() {
   Promise.resolve(currentRows)
   .then(triggerSearch)
-  .then(triggerCategories);
+  .then(triggerCategories)
+  .then(triggerAvailability);
 }
 
 function intersection(a,b){
@@ -64,8 +60,17 @@ function pagesListener() {
     tab.style.fontWeight='bold';
     page = tab.textContent.trim().toLowerCase();
     loadList(letter, page);
+    resetFilters();
   };
 }
+
+function resetFilters() {
+  search.value ='';
+  categories.value = '';
+  availability.checked = true;
+}
+
+
 function loadList(letter, page) {
     return get(basePath + letter + pagePath + page).then(res=> {
         var progs = res.atoz_programmes;
@@ -116,6 +121,22 @@ function triggerCategories() {
 */
 function getCategoriesValue() {
   return categories.value;
+}
+
+function availabilityListener() {
+  return function(){
+    checkAll();
+  };
+}
+
+function triggerAvailability() {
+    var filteredRows = functions.filterAvailability(currentRows, getAvailabilityValue()) || [];
+    temp = intersection(temp, filteredRows);
+    putResults(temp);
+}
+
+function getAvailabilityValue() {
+  return availability.checked;
 }
 
 /*
@@ -180,5 +201,6 @@ search.addEventListener('input', searchListener());
 categories.addEventListener('input', categoriesListener());
 alphabet.addEventListener('click', alphabetListener());
 pages.addEventListener('click', pagesListener());
+availability.addEventListener('change', availabilityListener());
 
 window.onLoad=init();
