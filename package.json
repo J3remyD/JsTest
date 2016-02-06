@@ -1,0 +1,35 @@
+{
+  "name": "IPlayer",
+  "version": "1.0.0",
+  "description": "Interview",
+  "main": "",
+  "scripts": {
+    "install-all": "bower install && npm install",
+    "serve": "gulp serve",
+    "serve-test": "gulp serve:test"
+  },
+  "author": "Jeremy Darchy",
+  "license": "GNU",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "mocha": "^2.3.3",
+    "phantomjs": "^1.9.18"
+  },
+  "devDependencies": {
+    "arrow-mocha": "^1.0.1",
+    "babelify": "^6.3.0",
+    "browser-sync": "^2.9.6",
+    "browserify": "^11.2.0",
+    "chai": "^3.3.0",
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.6",
+    "json-server": "^0.8.0",
+    "mocha": "^2.3.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
+  }
+}
