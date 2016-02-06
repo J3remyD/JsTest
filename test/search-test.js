@@ -5,12 +5,34 @@ var search = [];
 suite('Tests', function() {
 
   setup(function() {
-      search = ['astronaute','bassist','comedian'];
+      search = [
+        {
+          title: 'astronaute',
+          synopses: {
+            small: 'zzzz'
+          }
+        },
+        {
+          title:'bassist',
+          synopses: {
+            small: ''
+          }
+        },
+        {
+          title:'comedian',
+          synopses: {
+            small: ''
+          }
+        }
+      ];
   });
 
   test('search should return the sublist filtered', function(done) {
       assert.equal(search.length, 3 , 'Wrong size of search values');
-      assert.equal(functions.filterSearch(search, "as").length, 2, 'Wrong number of filtered values');
+      /*
+      * here we expect one because bassist contains "as" but doesn't startsWith it !!
+      */
+      assert.equal(functions.filterSearch(search, "as").length, 1, 'Wrong number of filtered values');
       done();
   });
 
@@ -20,7 +42,12 @@ suite('Tests', function() {
   });
 
   test('search for unknown values should return an empty array', function(done) {
-      assert.equal(functions.filterSearch(search, "zx@!").length, 0, 'Wrong number of values');
+      assert.equal(functions.filterSearch(search, "@!").length, 0, 'Wrong number of values');
+      done();
+  });
+
+  test('search for values should be effective also on synopses', function(done) {
+      assert.equal(functions.filterSearch(search, "z").length, 1, 'Wrong number of values');
       done();
   });
 });
