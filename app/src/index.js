@@ -50,7 +50,7 @@ function intersection(a,b){
 
 function alphabetListener() {
   return function() {
-    letter = alphabet.selectedItem.textContent.trim().toLowerCase();
+    letter = event.target.textContent.trim().toLowerCase();
     loadList(letter, page);
   };
 }
