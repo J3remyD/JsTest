@@ -161,7 +161,11 @@ function putAlphabet(letters) {
   @param res an array of string representing fetched datas
 */
 function putResults(res) {
-  results.innerHTML = res.length === 0 ? 'No result found matching your filters' : '<ul style="list-style-type: none;">' + _.map(res, r =>
+  var beginRow = (page - 1) * per_page;
+  var endRow = Math.min(page * per_page, currentCount);
+
+  countRows.innerHTML = 'Results rows : '+ beginRow + ' - ' + endRow + ' were fetched ' + ' | Page ' + page;
+  results.innerHTML = res.length === 0 ? 'No results found matching your filters' : '<ul style="list-style-type: none;">' + _.map(res, r =>
     `<li style="float:left; position:relative">
       <div style="display:inline-block;  float:left;  ">
         <h3>${r.title} | <i style="color: #4caf50">${r.status} </i></h3>

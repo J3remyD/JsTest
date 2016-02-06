@@ -46,14 +46,17 @@
       -ms-flex-direction: column;
       -webkit-flex-direction: column;
       flex-direction: column;
+      padding-left: 8px;
     }
 
     #center > paper-material {
       margin: 10px 0px;
+      min-width: 450px;
+      padding-left: 10px;
     }
 
     #inputs > paper-material {
-      padding: 20px;
+      padding: 30px;
       margin: 10px 0px;
     }
 
@@ -87,6 +90,11 @@
       padding:0 20px 0px 10px;
       font-size: 15;
       bottom: 15px;
+    }
+
+    .countRows {
+      text-align: center;
+      font-size:18px;
     }
 
     paper-material {
@@ -129,6 +137,7 @@
     </form>
     <form>
       <div id="center">
+        <paper-material id="countRows" class="countRows"> Results: 0 rows were fetched </paper-material>
         <paper-material id="results">No Result</paper-material>
     <!--    <paper-tabs id="pages" selected="{{activeTabId}}"></paper-tabs> -->
         <!-- <paper-material id="pages" align="center">No Pagination</<paper-material>-->
