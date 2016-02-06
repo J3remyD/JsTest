@@ -165,7 +165,7 @@ function putResults(res) {
   var endRow = Math.min(page * per_page, currentCount);
 
   countRows.innerHTML = 'Results rows : '+ beginRow + ' - ' + endRow + ' were fetched ' + ' | Page ' + page;
-  results.innerHTML = res.length === 0 ? 'No results found matching your filters' : '<ul style="list-style-type: none;">' + _.map(res, r =>
+  var computedRes = '<ul style="list-style-type: none;">' + _.map(res, r =>
     `<li style="float:left; position:relative">
       <div style="display:inline-block;  float:left;  ">
         <h3>${r.title} | <i style="color: #4caf50">${r.status} </i></h3>
@@ -179,12 +179,18 @@ function putResults(res) {
           ${r.synopses.small}
         </i>
       </div>
-      <div style="display:inline-block; float:right; padding: 20 0 0 20 ">
-        <img style="display:inline-block; position:absolute" src='${r.images.standard}'/>
+      <div style=" padding: 20px 10px 0px 10px ">
+        <img style="display:inline-block; padding-top:5px;" src='${r.images.standard}'/>
       </div>
-    <br><br>
+    <br>
     </li>`).join('') + '</ul>';
+    results.innerHTML = res.length === 0 ? 'No results found matching your filters' : computedRes.replaceAll(utilities.recipes.pattern,
+    utilities.recipes.sizes.small);
 }
+
+String.prototype.replaceAll = function(target, replacement) {
+  return this.split(target).join(replacement);
+};
 
 function putPages (nbPages) {
   pages.innerHTML = '' + _.times(nbPages, r =>
