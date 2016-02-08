@@ -74,11 +74,22 @@ function resetFilters() {
 function loadList(letter, page) {
     return get(basePath + letter + pagePath + page).then(res=> {
         var progs = res.atoz_programmes;
-          currentCount = progs.count;
-          per_page = progs.per_page;
+        currentCount = progs.count;
+        per_page = progs.per_page;
         currentRows = progs.elements;
-        putResults(currentRows);
-        putPages(Math.ceil(currentCount / per_page));
+
+        var maxPage = Math.ceil(currentCount / per_page);
+        if(maxPage < parseInt(page)) {
+          page = maxPage;
+          loadList(letter, page);
+        } else {
+          putResults(currentRows);
+          putPages(maxPage);
+        }
+
+        var beginRow = (page - 1) * per_page;
+        var endRow = Math.min(page * per_page, currentCount);
+        countRows.innerHTML = 'Results rows : '+ beginRow + ' - ' + endRow + ' were fetched ' + ' | Page ' + page;
     });
 }
 
@@ -160,10 +171,6 @@ function putAlphabet(letters) {
   @param res an array of string representing fetched datas
 */
 function putResults(res) {
-  var beginRow = (page - 1) * per_page;
-  var endRow = Math.min(page * per_page, currentCount);
-
-  countRows.innerHTML = 'Results rows : '+ beginRow + ' - ' + endRow + ' were fetched ' + ' | Page ' + page;
     var computedRes = '<div class="cards">' + _.map(res, r =>
       `<style is="custom-style">
           #card-content {
