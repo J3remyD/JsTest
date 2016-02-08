@@ -8,11 +8,14 @@
   <!-- polymer elements -->
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="./bower_components/iron-flex-layout/iron-flex-layout.html">
+  <link rel="import" href="./bower_components/iron-collapse/iron-collapse.html">
+  <link rel="import" href="./bower_components/iron-icon/iron-icon.html">
   <link rel="import" href="./bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="./bower_components/paper-material/paper-material.html">
   <link rel="import" href="./bower_components/paper-checkbox/paper-checkbox.html">
   <link rel="import" href="./bower_components/paper-item/paper-item.html">
-  <link rel="import" href="./bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="./bower_components/paper-card/paper-card.html">
+  <link rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="import" href="./bower_components/paper-slider/paper-slider.html">
   <link rel="import" href="./bower_components/paper-tooltip/paper-tooltip.html">
   <link rel="import" href="./bower_components/iron-icons/maps-icons.html">
@@ -23,14 +26,14 @@
   <style is="custom-style">
     body {
       margin: auto;
-      width: 800px;
-      height: 500px;
+      height: 500px;      
     }
 
     #container {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
+
       -ms-flex-direction: row;
       -webkit-flex-direction: row;
       flex-direction: row;
@@ -47,14 +50,14 @@
     }
 
     #center > paper-material {
-      margin: 10px 0px;
+      margin: 10px 10px;
       min-width: 500px;
-      padding-left: 10px;
     }
 
     #inputs > paper-material {
       padding: 30px;
       margin: 10px 0px;
+      max-width: 150px;
     }
 
     #pages {
@@ -78,9 +81,27 @@
     #alphabet {
       padding:20px;
       font-size: 17px;
+      max-width: 150px;
       @apply(--layout-center);
       @apply(--paper-font-subhead);
       @apply(--paper-item);
+    }
+
+    .cafe-header { @apply(--paper-font-headline); }
+    .cafe-light { color: var(--paper-grey-600); }
+    .cafe-reserve { color: var(--google-blue-500); }
+
+    .list-generated {
+      list-style-type: none;
+    }
+
+    .letter {
+      float:left;
+      position:relative;
+    }
+
+    .letter : selected {
+      background-color: #eaeaea;
     }
 
     .page {
@@ -94,8 +115,18 @@
       font-size:18px;
     }
 
+    .cards {
+      text-align:left;
+    }
+
     paper-material {
       background-color: whitesmoke;
+    }
+
+    paper-card {
+      margin: 45px;
+      width: 350px;
+      height: 450px;
     }
 
     paper-checkbox.available {
@@ -111,7 +142,7 @@
 
 <body unresolved>
   <paper-toolbar>
-    <span class="title">Interview</span>
+    <span class="title">IPlayer</span>
   </paper-toolbar>
   <div id="container">
     <form id="inputs">
@@ -136,39 +167,9 @@
       <div id="center">
         <paper-material id="countRows" class="countRows"> Results: 0 rows were fetched </paper-material>
         <paper-material id="results">No Result</paper-material>
-    <!--    <paper-tabs id="pages" selected="{{activeTabId}}"></paper-tabs> -->
-        <!-- <paper-material id="pages" align="center">No Pagination</<paper-material>-->
       </div>
     </form>
-    <paper-listbox id="alphabet">
-         <paper-item>A</paper-item>
-         <paper-item>B</paper-item>
-         <paper-item>C</paper-item>
-         <paper-item>D</paper-item>
-         <paper-item>E</paper-item>
-         <paper-item>F</paper-item>
-         <paper-item>G</paper-item>
-         <paper-item>H</paper-item>
-         <paper-item>I</paper-item>
-         <paper-item>J</paper-item>
-         <paper-item>K</paper-item>
-         <paper-item>L</paper-item>
-         <paper-item>M</paper-item>
-         <paper-item>N</paper-item>
-         <paper-item>O</paper-item>
-         <paper-item>P</paper-item>
-         <paper-item>Q</paper-item>
-         <paper-item>R</paper-item>
-         <paper-item>S</paper-item>
-         <paper-item>T</paper-item>
-         <paper-item>U</paper-item>
-         <paper-item>V</paper-item>
-         <paper-item>W</paper-item>
-         <paper-item>X</paper-item>
-         <paper-item>Y</paper-item>
-         <paper-item>Z</paper-item>
-    </paper-listbox>
-  <!--  <alphabet-list id="alphabet" class="alphabet"></alphabet-list>-->
+    <paper-listbox id="alphabet"></paper-listbox>
   </div>
   <script src="./bundle.js"></script>
 </body>

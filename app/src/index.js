@@ -26,7 +26,7 @@ var per_page = -1;
 var temp;
 
 function init() {
- //  putAlphabet(utilities.alphabet);
+  putAlphabet(utilities.alphabet);
   loadList(letter, page);
 }
 
@@ -147,14 +147,13 @@ function putResult(res) {
   results.textContent = res;
 }
 
-/*
-//to replace hard coded listbox
 
 function putAlphabet(letters) {
-  alphabet.innerHTML = '' + _.forEach(letters, r =>
-    `<paper-item>${r}</paper-item>`)
-    .join('') + '';
-}*/
+  alphabet.innerHTML = '<ul class="list-generated">' + _.map(letters, r =>
+    `<li class="letter">
+        <paper-item >${r}</paper-item>
+    </li>`).join('') + '</ul>';
+}
 
 /*
   Set the content of the result panel
@@ -165,25 +164,66 @@ function putResults(res) {
   var endRow = Math.min(page * per_page, currentCount);
 
   countRows.innerHTML = 'Results rows : '+ beginRow + ' - ' + endRow + ' were fetched ' + ' | Page ' + page;
-  var computedRes = '<ul style="list-style-type: none;">' + _.map(res, r =>
-    `<li style="float:left; position:relative">
-      <div style="display:inline-block;  float:left;  ">
-        <h3>${r.title} | <i style="color: #4caf50">${r.status} </i></h3>
-        <b>type:</b> ${r.tleo_type} | <b>television:</b> ${r.type}
-        <br>
-        <b>Categories:</b> ${r.categories}
-        <br>
-        <i>
-          <b>Summary:</b>
-          <br>
-          ${r.synopses.small}
-        </i>
-      </div>
-      <div style=" padding: 20px 10px 0px 10px ">
-        <img style="display:inline-block; padding-top:5px;" src='${r.images.standard}'/>
-      </div>
-    <br>
-    </li>`).join('') + '</ul>';
+    var computedRes = '<div class="cards">' + _.map(res, r =>
+      `<style is="custom-style">
+          #card-content {
+            @apply(--layout-vertical);
+            @apply(--layout-wrap);
+          }
+
+          #card-content > paper-card {
+            box-sizing: border-box;
+            margin: 4px;
+            flex: 0 0 auto;
+
+          }
+
+          .card-content {
+            min-width: 300px;
+            min-height:156px;
+          }
+
+          .card-header {
+            @apply(--paper-font-headline);
+            font-size:16px;
+          }
+          .card-light {
+            color: var(--paper-grey-600);
+            max-width: 250px;
+            font-size: 12px;
+          }
+          .card-location {
+            float: right;
+            font-size: 14px;
+            vertical-align: middle;
+          }
+
+          .cats {
+            font-size: 14px;
+            color: var(--paper-grey-600);
+          }
+
+          .summary {
+            text-align: justify;
+            font-size: 14px;
+            margin-top: 10px;
+          }
+        </style>
+        <paper-card id="img" image="${r.images.standard}">
+        <div id="card-content" class="card-content">
+        <div class="card-location card-light">
+          <span>${r.status}</span>
+        </div>
+        <div class="card-header">${r.title}</div>
+          <p class="cats">Format: ${r.tleo_type} <br> Type: ${r.type}</p>
+          <i class="cats">Categories: ${r.categories}</i>
+          <div class="summary">
+          <i>Summary</i> <br>
+            ${r.synopses.small}
+          </div>
+        </div>
+        </paper-card>
+      `).join('') + '</div>';
     results.innerHTML = res.length === 0 ? 'No results found matching your filters' : computedRes.replaceAll(utilities.recipes.pattern,
     utilities.recipes.sizes.small);
 }
