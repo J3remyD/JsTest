@@ -39,7 +39,7 @@ var b = buildBrowserify({
 });
 
 var bTest = buildBrowserify({
-  entries: ['./test/search-test.js']
+  entries: ['./test/tests.js']
 });
 
 gulp.task('default', ['js', 'copyHtml']);
