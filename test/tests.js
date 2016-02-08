@@ -65,28 +65,6 @@ suite('Search', function() {
       assert.equal(functions.filterSearch(datas, "z").length, 1, 'Wrong number of values');
       done();
   });
-
-  /*
-   *
-   * SEARCH Categories
-   *
-   */
-   test('search wrong categories values should return nothing', function(done) {
-       assert.equal(functions.filterCategories(datas, "x").length, 0, 'x categories should return empty array');
-       assert.equal(functions.filterCategories(datas, "").length, 0, 'Wrong number of values');
-       done();
-   });
-
-   test('search for unknown values should return an empty array', function(done) {
-       assert.equal(functions.filterCategories(datas, "@!").length, 0, 'Wrong number of values');
-       done();
-   });
-
-   test('search for values should be effective also on synopses', function(done) {
-       assert.equal(functions.filterSearch(datas, "z").length, 1, 'Wrong number of values');
-       done();
-   });
-
 });
 
 suite('Categories', function() {
